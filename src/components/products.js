@@ -8,6 +8,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import { addItem } from "../store/cart";
 
 const useStyles = makeStyles({
   root: {
@@ -26,35 +27,39 @@ function Products(props) {
         {props.products.map((product) => {
           return (
             <div className="product">
-            <Card className={classes.root}>
-              <CardActionArea>
-                <CardMedia
-                  className={classes.media}
-                  image={product.img}
-                  title="Contemplative Reptile"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="h2">
-                    {product.name}
-                  </Typography>
-                  <Typography
-                    variant="body2"
-                    color="textSecondary"
-                    component="p"
+              <Card className={classes.root}>
+                <CardActionArea>
+                  <CardMedia
+                    className={classes.media}
+                    image={product.img}
+                    title="Contemplative Reptile"
+                  />
+                  <CardContent>
+                    <Typography gutterBottom variant="h5" component="h2">
+                      {product.name}
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      color="textSecondary"
+                      component="p"
+                    >
+                      {product.description}
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+                <CardActions>
+                  <Button
+                    size="small"
+                    color="primary"
+                    onClick={() => props.addItem(product)}
                   >
-                    {product.description}
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-              <CardActions>
-                <Button size="small" color="primary">
-                  Add to cart
-                </Button>
-                <Button size="small" color="primary">
-                  View details
-                </Button>
-              </CardActions>
-            </Card>
+                    Add to cart
+                  </Button>
+                  <Button size="small" color="primary">
+                    View details
+                  </Button>
+                </CardActions>
+              </Card>
             </div>
           );
         })}
@@ -64,10 +69,12 @@ function Products(props) {
 }
 const mapStateToProps = (state) => {
   console.log(state);
-  const active=state.categories.active;
-  const products=state.products.products.filter(product=>product.category==active)
+  const active = state.categories.active;
+  const products = state.products.products.filter(
+    (product) => product.category == active
+  );
   return { products: products };
 };
-
+const mapDispatchToProps = { addItem };
 // the order of (mapStateToProps,mapDispatchToProps have to be the same
-export default connect(mapStateToProps)(Products);
+export default connect(mapStateToProps, mapDispatchToProps)(Products);
