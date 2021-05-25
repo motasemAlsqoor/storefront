@@ -1,6 +1,7 @@
 const initialState = {
   products: [
     {
+      id:1,
       category: "food",
       name: "tomato",
       price: 10,
@@ -9,6 +10,7 @@ const initialState = {
       img: "https://qtmd.org/wp-content/uploads/2019/07/howcuttingdo.jpg",
     },
     {
+      id:2,
       category: "electronics",
       name: "iphone8-plus",
       price: 500,
@@ -24,11 +26,8 @@ const products = (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
-    case "CHANGECATEGORY":
-    //   const products = state.products.filter(
-    //     (product) => payload == product.category
-    //   );
-    //   return { products };
+    case "REDUCEITEM":
+  
     case "RESET":
       return initialState;
     default:
@@ -36,9 +35,4 @@ const products = (state = initialState, action) => {
   }
 };
 export default products;
-// export const changeActiveCategory = (categoryName) => {
-//   return {
-//     type: "CHANGECATEGORY",
-//     payload: categoryName,
-//   };
-// };
+
