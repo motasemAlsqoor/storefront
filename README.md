@@ -8,7 +8,7 @@ npm test
 
 ## deploy
 
-https://wqhin.csb.app/
+https://dizvo.csb.app/
 
 ## uml
 
